@@ -1,6 +1,7 @@
 import '../auth/auth_provider.dart';
 import '../auth/auth_user.dart';
 
+// Auth Service Class Added
 class AuthService implements AuthProvider {
   final AuthProvider provider;
   const AuthService(this.provider);
