@@ -57,6 +57,8 @@ class _NoteViewState extends State<NoteView> {
           }))
         ],
       ),
+
+      // creating a stream building for the home page
       body: FutureBuilder(
         future: _notesService.getOrCreateUser(email: userEmail),
         builder: (context, snapshot) {
