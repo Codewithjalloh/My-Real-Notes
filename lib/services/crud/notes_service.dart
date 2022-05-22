@@ -11,6 +11,7 @@ class NotesService {
 
   List<DatabaseNote> _notes = [];
 
+  // creating a single ton
   static final NotesService _shared = NotesService._sharedInstance();
   NotesService._sharedInstance();
   factory NotesService() => _shared;
