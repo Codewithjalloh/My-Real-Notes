@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/services/auth/auth_service.dart';
 import 'package:mynotes/services/crud/notes_service.dart';
-import '../enums/menu_action.dart';
+import '../../enums/menu_action.dart';
 import 'dart:developer' as devtools show log;
 
 class NoteView extends StatefulWidget {
@@ -33,28 +33,36 @@ class _NoteViewState extends State<NoteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Main UI"),
+        title: const Text("Your Notes"),
         actions: [
-          PopupMenuButton<MenuAction>(onSelected: (value) async {
-            switch (value) {
-              case MenuAction.logout:
-                final shouldLogout = await showLogoOutDialog(context);
-                if (shouldLogout) {
-                  await AuthService.firebase().logOut();
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil(loginRoute, (_) => false);
-                }
-                devtools.log(shouldLogout.toString());
-                break;
-            }
-          }, itemBuilder: ((context) {
-            return [
-              const PopupMenuItem<MenuAction>(
-                value: MenuAction.logout,
-                child: Text("Log out"),
-              ),
-            ];
-          }))
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(newNoteRoute);
+              },
+              icon: Icon(Icons.add)),
+          PopupMenuButton<MenuAction>(
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogoOutDialog(context);
+                  if (shouldLogout) {
+                    await AuthService.firebase().logOut();
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil(loginRoute, (_) => false);
+                  }
+                  devtools.log(shouldLogout.toString());
+                  break;
+              }
+            },
+            itemBuilder: ((context) {
+              return [
+                const PopupMenuItem<MenuAction>(
+                  value: MenuAction.logout,
+                  child: Text("Log out"),
+                ),
+              ];
+            }),
+          ),
         ],
       ),
 
