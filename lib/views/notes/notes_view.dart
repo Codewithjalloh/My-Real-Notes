@@ -36,10 +36,11 @@ class _NoteViewState extends State<NoteView> {
         title: const Text("Your Notes"),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(newNoteRoute);
-              },
-              icon: Icon(Icons.add)),
+            onPressed: () {
+              Navigator.of(context).pushNamed(newNoteRoute);
+            },
+            icon: Icon(Icons.add),
+          ),
           PopupMenuButton<MenuAction>(
             onSelected: (value) async {
               switch (value) {

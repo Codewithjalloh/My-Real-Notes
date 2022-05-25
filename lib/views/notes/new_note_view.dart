@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mynotes/services/auth/auth_service.dart';
 import 'package:mynotes/services/crud/notes_service.dart';
 
@@ -84,7 +85,11 @@ class _NewNoteViewState extends State<NewNoteView> {
       appBar: AppBar(
         title: const Text("New Note"),
       ),
-      body: FutureBuilder(
+      body:
+          //
+          //const Text("hello"),
+          //
+          FutureBuilder(
         future: createNewNote(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -94,7 +99,7 @@ class _NewNoteViewState extends State<NewNoteView> {
               return TextField(
                 controller: _textController,
                 keyboardType: TextInputType.multiline,
-                maxLength: 0,
+                inputFormatters: [LengthLimitingTextInputFormatter(100)],
                 decoration:
                     InputDecoration(hintText: "Start typing your note..."),
               );
